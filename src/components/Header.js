@@ -36,7 +36,7 @@ class Header extends React.Component {
                   <Link
                     to="/favorites"
                     data-testid="link-to-favorites"
-                    id="link-favorites"
+                    className="link-favorites"
                   >
                     Favorites
                   </Link>

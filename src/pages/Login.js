@@ -45,11 +45,11 @@ class Login extends React.Component {
             : (
               <form>
                 <h1>Login</h1>
-                <div id="form-main-content">
+                <div className="form-main-content">
                   <label htmlFor="login-name">
                     <input
                       name="userName"
-                      id="login-name"
+                      className="login-name"
                       value={ userName }
                       data-testid="login-name-input"
                       placeholder="Digite seu nome:"
@@ -60,7 +60,7 @@ class Login extends React.Component {
 
                   <button
                     data-testid="login-submit-button"
-                    id="login-button"
+                    className="login-button"
                     type="button"
                     disabled={ isButtonDisabled }
                     onClick={ this.saveUser }
