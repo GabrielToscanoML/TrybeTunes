@@ -1,0 +1,28 @@
+h1 {
+  text-align: center;
+}
+
+#form-main-content {
+  align-items: center;
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+#login-button {
+  background-color:darkgreen;
+  color: white;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+#login-button, #login-name {
+  border-radius: 5px;
+  font-size: 25px;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
