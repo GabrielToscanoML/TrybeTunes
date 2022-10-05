@@ -9,21 +9,24 @@ class Search extends React.Component {
     artistInput: '',
     isButtonDisabled: true,
     loading: false,
-    isOK: false,
+    isOK: null,
+    noAlbum: null,
     infoList: [],
     inputCopy: '',
   };
 
   requestAPI = async () => {
+    this.setState({ isButtonDisabled: true, isOK: false, noAlbum: false }); // resetando as configurações
     const { artistInput } = this.state;
     this.setState({ loading: true });
     const response = await searchAlbumsAPI(artistInput);
-    this.setState({ infoList: response });
-    this.setState({ loading: false });
-    this.setState({ isOK: true });
-    this.setState({ inputCopy: artistInput }); // limpando o input
-    this.setState({ artistInput: '' }); // limpando o input
-    console.log(response);
+    this.setState({ infoList: response, loading: false });
+    if (response.length !== 0) {
+      this.setState({ isOK: true });
+    } else {
+      this.setState({ noAlbum: true });
+    }
+    this.setState({ inputCopy: artistInput, artistInput: '' }); // limpando o input
   };
 
   handleInputOnChange = (event) => {
@@ -43,7 +46,7 @@ class Search extends React.Component {
 
   render() {
     const { isButtonDisabled, artistInput,
-      loading, isOK, infoList, inputCopy } = this.state;
+      loading, isOK, infoList, inputCopy, noAlbum } = this.state;
 
     return (
       <div data-testid="page-search">
@@ -55,7 +58,6 @@ class Search extends React.Component {
               <form>
                 <label htmlFor="search-artist">
                   <input
-                    // name="userName"
                     className="search-artist"
                     data-testid="search-artist-input"
                     placeholder="Nome do Artista:"
@@ -76,7 +78,6 @@ class Search extends React.Component {
               </form>
             )
         }
-
         { isOK && (
           <div>
             <p>
@@ -86,11 +87,10 @@ class Search extends React.Component {
             </p>
           </div>)}
 
-        { infoList.length === 0 && (
+        { noAlbum && (
           <div>
             <p> Nenhum álbum foi encontrado </p>
           </div>)}
-
         {
           infoList.map((album) => (
             <div key="">
