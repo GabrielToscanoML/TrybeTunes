@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
@@ -12,7 +13,7 @@ class Search extends React.Component {
     isOK: null,
     noAlbum: null,
     infoList: [],
-    inputCopy: '',
+    inputCopy: null,
   };
 
   requestAPI = async () => {
@@ -94,7 +95,12 @@ class Search extends React.Component {
         {
           infoList.map((album) => (
             <div key="">
-              <p>{ album.artistName }</p>
+              <Link
+                to={ `/album/${album.collectionId}` }
+                data-testid={ `link-to-album-${album.collectionId}` }
+              >
+                { album.artistName }
+              </Link>
               <p>{ album.collectionName }</p>
               <img src={ album.artworkUrl100 } alt={ album.artistName } />
             </div>
