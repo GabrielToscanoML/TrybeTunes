@@ -44,7 +44,7 @@ class Login extends React.Component {
             ? <Loading />
             : (
               <form>
-                <h1>Login</h1>
+                <h1 className="login-title">Login</h1>
                 <div className="form-main-content">
                   <label htmlFor="login-name">
                     <input

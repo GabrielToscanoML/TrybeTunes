@@ -30,8 +30,13 @@ class Header extends React.Component {
             ? <Loading />
             : (
               <div>
-                <h1 data-testid="header-user-name">{ userName }</h1>
-                <nav id="nav-links">
+                <h1
+                  className="header-title"
+                  data-testid="header-user-name"
+                >
+                  { userName }
+                </h1>
+                <nav className="nav-links">
                   <Link to="/search" data-testid="link-to-search"> Search </Link>
                   <Link
                     to="/favorites"

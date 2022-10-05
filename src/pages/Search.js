@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Loading from '../components/Loading';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import './search.css';
 
 class Search extends React.Component {
   // praticamente copiei o formulario do Login e adaptei
@@ -56,7 +57,7 @@ class Search extends React.Component {
           loading
             ? <Loading />
             : (
-              <form>
+              <form className="search-form">
                 <label htmlFor="search-artist">
                   <input
                     className="search-artist"
