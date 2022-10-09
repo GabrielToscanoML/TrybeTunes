@@ -48,7 +48,7 @@ class Album extends React.Component {
                         <MusicCard
                           key={ music.trackId }
                           music={ music }
-                          update={ this.favoriteSongs }
+                          update={ this.favoriteSongs } // atualizando pro requisito 10
                         />
                       );
                     }
