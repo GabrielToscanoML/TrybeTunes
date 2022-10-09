@@ -1,19 +1,55 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Loading from './Loading';
+import { addSong } from '../services/favoriteSongsAPI';
 
 class MusicCard extends React.Component {
+  state = {
+    loading: false,
+    favorite: false,
+  };
+
+  addToFavorites = async (event) => {
+    const { value, checked } = event.target;
+    if (checked) {
+      this.setState({ loading: true });
+      await addSong(value);
+      this.setState({ loading: false, favorite: true });
+    }
+  };
+
   render() {
     const { music } = this.props;
+    const { loading, favorite } = this.state;
     return (
       <div>
-        <h3>{ music.trackName }</h3>
-        <audio data-testid="audio-component" src={ music.previewUrl } controls>
-          <track kind="captions" />
-          O seu navegador não suporta o elemento
-          {' '}
-          <code>audio</code>
-          .
-        </audio>
+        {
+          loading
+            ? <Loading />
+            : (
+              <div>
+                <h3>{ music.trackName }</h3>
+                <audio data-testid="audio-component" src={ music.previewUrl } controls>
+                  <track kind="captions" />
+                  O seu navegador não suporta o elemento
+                  {' '}
+                  <code>audio</code>
+                  .
+                </audio>
+                <label htmlFor={ music.trackId }>
+                  <input
+                    type="checkbox"
+                    data-testid={ `checkbox-music-${music.trackId}` }
+                    id={ music.trackId }
+                    value={ JSON.stringify(music) } // usando JSON pra transformar em objeto
+                    checked={ favorite }
+                    onChange={ this.addToFavorites }
+                  />
+                  Favorita
+                </label>
+              </div>
+            )
+        }
       </div>
     );
   }
