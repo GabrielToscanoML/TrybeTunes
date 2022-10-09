@@ -15,15 +15,15 @@ class MusicCard extends React.Component {
   }
 
   requestFavoriteSongs = async () => {
-    const favorites = await getFavoriteSongs();
-    this.setState({ favoriteList: favorites }, this.checkFavorite);
+    const favoriteSongsRequest = await getFavoriteSongs();
+    this.setState({ favoriteList: favoriteSongsRequest }, this.checkFavorite);
   };
 
   checkFavorite = () => {
     const { music } = this.props;
     const { favoriteList } = this.state;
-    const search = favoriteList.some((event) => event.trackId === music.trackId);
-    if (search) {
+    const procura = favoriteList.some((event) => event.trackId === music.trackId);
+    if (procura) {
       this.setState({ favorite: true });
     }
   };
