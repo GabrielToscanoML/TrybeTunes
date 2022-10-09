@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Loading from '../components/Loading';
 import musicsAPI from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 
 class Album extends React.Component {
   state = {
@@ -14,6 +15,10 @@ class Album extends React.Component {
   componentDidMount() {
     this.requestAPI();
   }
+
+  favoriteSongs = async () => {
+    await getFavoriteSongs();
+  };
 
   requestAPI = async () => {
     this.setState({ loading: true });
@@ -43,6 +48,7 @@ class Album extends React.Component {
                         <MusicCard
                           key={ music.trackId }
                           music={ music }
+                          update={ this.favoriteSongs }
                         />
                       );
                     }
